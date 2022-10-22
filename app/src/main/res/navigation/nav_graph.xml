@@ -12,12 +12,16 @@
         tools:layout="@layout/fragment_user" />
     <fragment
         android:id="@+id/postsFragment"
-        android:name="com.example.retrofitexample.data.ui.posts.PostsFragment"
+        android:name="com.example.retrofitexample.data.ui.posts.fragment.PostsFragment"
         android:label="fragment_posts"
-        tools:layout="@layout/fragment_posts" />
+        tools:layout="@layout/fragment_posts" >
+        <action
+            android:id="@+id/action_postsFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
     <fragment
-        android:id="@+id/detailFragment"
-        android:name="com.example.retrofitexample.data.ui.postDetail.DetailFragment"
-        android:label="DetailFragment"
-        tools:layout="@layout/fragment_item_detail"/>
+        tools:layout="@layout/fragment_post_detail"
+        android:id="@+id/postDetailFragment"
+        android:name="com.example.retrofitexample.data.ui.postDetail.fragment.PostDetailFragment"
+        android:label="PostDetailFragment" />
 </navigation>

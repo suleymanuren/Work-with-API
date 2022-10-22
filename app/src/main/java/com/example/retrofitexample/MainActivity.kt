@@ -18,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView = findViewById(R.id.bottomNavigationView)
         initNavController()
 
+
         //PostDataBase.getDatabase(this)
     }
 private fun initNavController(){

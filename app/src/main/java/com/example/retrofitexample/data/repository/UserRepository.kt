@@ -8,6 +8,4 @@ import retrofit2.Call
 interface UserRepository {
     fun getUsers(): Call<List<Users>>
     fun getUserById(id: Int): UserEntity?
-
-
 }

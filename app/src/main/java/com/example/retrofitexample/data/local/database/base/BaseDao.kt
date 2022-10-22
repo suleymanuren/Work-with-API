@@ -5,6 +5,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Update
+import retrofit2.http.GET
 
 @Dao
 interface BaseDao<T> {
@@ -20,6 +21,7 @@ interface BaseDao<T> {
 
     @Delete
      fun delete(data: T)
+
 
 
 }

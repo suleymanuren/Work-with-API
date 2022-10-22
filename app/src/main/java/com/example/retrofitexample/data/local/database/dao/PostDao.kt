@@ -18,4 +18,5 @@ interface PostDao : BaseDao<PostEntity>{
     @Query("SELECT * FROM ${Constants.TABLE_POST_NAME} WHERE postId = :postId")
     fun getPostById(postId: String): PostEntity?
 
+
 }

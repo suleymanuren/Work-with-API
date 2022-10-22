@@ -10,6 +10,8 @@
 
     </data>
 
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -99,8 +101,7 @@
                         android:layout_height="24dp"
                         android:gravity="end"
                         android:scaleType="centerCrop"
-                        android:src="@{dataHolder.isFavorite ? @drawable/ic_red_favorite : @drawable/ic_baseline_favorite_24}" />
-                </LinearLayout>
+                        android:src="@{dataHolder.isFavorite ? @drawable/ic_red_favorite : @drawable/ic_baseline_favorite_24}" /></LinearLayout>
 
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>

@@ -13,7 +13,7 @@ import com.example.retrofitexample.data.ui.loadingprogress.LoadingProgressBar
 import com.example.retrofitexample.data.ui.users.viewmodel.UserViewEvent
 import com.example.retrofitexample.data.ui.users.viewmodel.UserViewModel
 import com.example.retrofitexample.databinding.FragmentUserBinding
-import com.example.retrofitexample.ui.posts.adapter.UserAdapter
+import com.example.retrofitexample.data.ui.users.adapter.UserAdapter
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 

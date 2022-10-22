@@ -4,6 +4,7 @@ import com.example.retrofitexample.data.local.database.PostDataBase
 import com.example.retrofitexample.data.local.database.entity.PostEntity
 import com.example.retrofitexample.data.remote.api.ApiService
 import com.example.retrofitexample.data.model.Post
+import com.example.retrofitexample.data.model.PostDTO
 import com.example.retrofitexample.data.model.Users
 import retrofit2.Call
 
@@ -16,8 +17,8 @@ class PostRepositoryImplementation constructor(
     }
 
 
-    override fun getPostById(id: Int): PostEntity? {
-        return postsDatabase.postDao().getPostById(id.toString())
+    override fun getPostById(id: Int): Call<Post> {
+        return apiService.getPostById(id)
     }
 
     override fun insertFavoritePost(post: PostEntity) {
@@ -27,4 +28,8 @@ class PostRepositoryImplementation constructor(
     override fun deleteFavoritePost(post: PostEntity) {
         return postsDatabase.postDao().delete(post)
     }
+
+
+
+
 }

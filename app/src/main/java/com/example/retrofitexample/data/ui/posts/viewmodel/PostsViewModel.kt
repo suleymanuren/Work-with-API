@@ -1,8 +1,11 @@
 package com.example.retrofitexample.data.ui.posts.viewmodel
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.findNavController
+import com.example.retrofitexample.R
 import com.example.retrofitexample.data.local.database.entity.PostEntity
 import com.example.retrofitexample.data.model.DataState
 import com.example.retrofitexample.data.model.Post
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class PostsViewModel @Inject constructor(private val postRepository: PostRepository) : ViewModel() {
     private var _postLiveData = MutableLiveData<DataState<List<PostDTO>?>>()
     val postLiveData: LiveData<DataState<List<PostDTO>?>>
-        get() = _postLiveData
+    get() = _postLiveData
 
     private val _eventStateLiveData = MutableLiveData<PostViewEvent>()
     val eventStateLiveData: LiveData<PostViewEvent>
@@ -60,7 +63,6 @@ class PostsViewModel @Inject constructor(private val postRepository: PostReposit
             }
         })
     }
-
     fun onFavoritePost(post: PostDTO) {
         postRepository.getPostById(post.id ?: 0)?.let {
             postRepository.deleteFavoritePost(
@@ -80,6 +82,11 @@ class PostsViewModel @Inject constructor(private val postRepository: PostReposit
             )
         }
     }
+    fun getPostById(postId: Int): Call<Post> {
+
+        return postRepository.getPostById(postId)
+
+    }
 
     private fun isExists(postId: Int?): Boolean {
         postId?.let {
@@ -89,9 +96,9 @@ class PostsViewModel @Inject constructor(private val postRepository: PostReposit
         }
         return false
     }
-}
 
 sealed class PostViewEvent {
-    object NavigateToDetail : PostViewEvent()
+    class DetailPost(val post: PostEntity) : PostViewEvent()
     class ShowMessage(val message: String?) : PostViewEvent()
-}
+
+}}

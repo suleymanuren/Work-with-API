@@ -1,4 +1,4 @@
-package com.example.retrofitexample.ui.posts.adapter
+package com.example.retrofitexample.data.ui.users.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,8 @@ import com.example.retrofitexample.data.ui.users.fragment.UserFragment
 import com.example.retrofitexample.databinding.ItemUserLayoutBinding
 
 
-class UserAdapter(userFragment: UserFragment) : ListAdapter<UserDTO, UserAdapter.UserViewHolder>(UsersDiffUtil()) {
+class UserAdapter(userFragment: UserFragment) : ListAdapter<UserDTO, UserAdapter.UserViewHolder>(
+    UsersDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         return UserViewHolder(
             ItemUserLayoutBinding.inflate(

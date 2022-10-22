@@ -21,5 +21,4 @@ class PostsModule {
         return PostRepositoryImplementation(apiService, postsDatabase)
     }
 
-
 }
