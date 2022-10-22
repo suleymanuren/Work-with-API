@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.retrofitexample.data.local.database.entity.PostEntity
 import com.example.retrofitexample.data.model.*
 import com.example.retrofitexample.data.repository.PostRepository
 import com.example.retrofitexample.data.ui.posts.viewmodel.PostsViewModel
@@ -21,8 +22,8 @@ class PostDetailViewModel @Inject constructor(private val DetailPostRepository: 
     val DetailPostLiveData: LiveData<DataState<List<PostDTO>?>>
         get() = _DetailPostLiveData
 
-    private val _eventStateLiveData = MutableLiveData<PostsViewModel.PostViewEvent>()
-    val eventStateLiveData: LiveData<PostsViewModel.PostViewEvent>
+    private val _eventStateLiveData = MutableLiveData<PostsViewModel>()
+    val eventStateLiveData: LiveData<PostsViewModel>
         get() = _eventStateLiveData
 
     init {
@@ -72,6 +73,41 @@ class PostDetailViewModel @Inject constructor(private val DetailPostRepository: 
             }
         }
         return false
+    }
+    fun onFavoritePost(post: PostDTO) {
+        DetailPostRepository.getPostByIdForFavorite(post.id ?: 0)?.let {
+            DetailPostRepository.deleteFavoritePost(
+                post.id.toString()
+            )
+            updateFavoriteState( post.id,false)
+        } ?: kotlin.run {
+            DetailPostRepository.insertFavoritePost(
+                PostEntity(
+                    postId = post.id.toString(),
+                    postTitle = post.title,
+                    postBody = post.body
+                )
+            )
+            updateFavoriteState( post.id,true)
+        }
+    }
+    private fun updateFavoriteState(id:Int?, isFavorite:Boolean){
+        when(val current= _DetailPostLiveData.value){
+            is DataState.Success -> {
+                val currentList= current.data?.map {
+                    if (it.id==id){
+                        it.copy(isFavorite = isFavorite)
+
+                    }
+                    else it
+                }
+                _DetailPostLiveData.value=DataState.Success(currentList)
+            }
+            is DataState.Error -> {}
+            is DataState.Loading -> {}
+
+            null -> {}
+        }
     }
 
 

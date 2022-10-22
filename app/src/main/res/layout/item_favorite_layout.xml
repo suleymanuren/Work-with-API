@@ -10,8 +10,6 @@
 
     </data>
 
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -33,20 +31,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="20dp">
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/detail_page" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -114,7 +99,8 @@
                         android:layout_height="24dp"
                         android:gravity="end"
                         android:scaleType="centerCrop"
-                        android:src="@{dataHolder.isFavorite ? @drawable/ic_red_favorite : @drawable/ic_baseline_favorite_24}" /></LinearLayout>
+                        android:src="@{dataHolder.isFavorite ? @drawable/ic_red_favorite : @drawable/ic_baseline_favorite_24}" />
+                </LinearLayout>
 
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>

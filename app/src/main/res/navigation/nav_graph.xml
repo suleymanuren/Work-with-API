@@ -24,4 +24,8 @@
         android:id="@+id/postDetailFragment"
         android:name="com.example.retrofitexample.data.ui.postDetail.fragment.PostDetailFragment"
         android:label="PostDetailFragment" />
+    <fragment
+        android:id="@+id/favoriteListFragment"
+        android:name="com.example.retrofitexample.data.ui.favorites.fragment.FavoriteListFragment"
+        android:label="FavoriteListFragment" />
 </navigation>

@@ -10,6 +10,11 @@
         android:icon="@drawable/ic_baseline_local_post_office_24"
         android:title="Posts" />
 
+    <item
+        android:id="@+id/favoriteListFragment"
+        android:icon="@drawable/ic_red_favorite"
+        android:title="Favorites" />
+
 
 
 

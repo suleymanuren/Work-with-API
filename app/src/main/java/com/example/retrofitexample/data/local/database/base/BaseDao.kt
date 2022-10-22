@@ -1,10 +1,7 @@
 package com.example.retrofitexample.data.local.database.base
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Update
+import androidx.room.*
+import com.example.retrofitexample.utils.Constants
 import retrofit2.http.GET
 
 @Dao
@@ -21,6 +18,10 @@ interface BaseDao<T> {
 
     @Delete
      fun delete(data: T)
+
+    @Query("DELETE FROM ${Constants.TABLE_POST_NAME} WHERE postId = :postId")
+    fun deleteFavoriteById(postId: String)
+
 
 
 

@@ -11,7 +11,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.retrofitexample.data.model.DataState
+import com.example.retrofitexample.data.model.PostDTO
 import com.example.retrofitexample.data.ui.loadingprogress.LoadingProgressBar
+import com.example.retrofitexample.data.ui.postDetail.adapter.OnPostLikeClickListener
 import com.example.retrofitexample.data.ui.postDetail.viewmodel.PostDetailViewModel
 import com.example.retrofitexample.data.ui.postDetail.adapter.PostDetailAdapter
 import com.example.retrofitexample.databinding.FragmentPostDetailBinding
@@ -19,7 +21,7 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PostDetailFragment : Fragment() {
+ class PostDetailFragment : Fragment() , OnPostLikeClickListener {
  private lateinit var binding : FragmentPostDetailBinding
     private lateinit var navController: NavController
     private val viewHolderModel by viewModels<PostDetailViewModel>()
@@ -44,20 +46,20 @@ class PostDetailFragment : Fragment() {
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewHolderModel = viewHolderModel
         loadingProgressBar = LoadingProgressBar(requireContext())
-
-
         viewHolderModel.DetailPostLiveData.observe(viewLifecycleOwner) {
             when (it) {
                 is DataState.Success -> {
                     Log.d("DENEME2", "FRAGMENT GELEN ${it.data}")
                     loadingProgressBar.hide()
                     it.data?.let { safeData ->
-                        binding.rvPostsList.adapter = PostDetailAdapter(this@PostDetailFragment).apply {
+                        binding.rvPostsList.adapter = PostDetailAdapter(this@PostDetailFragment,this@PostDetailFragment).apply {
                             submitList(safeData)
                         }
                     } ?: run {
+
                         Toast.makeText(requireContext(), "No data", Toast.LENGTH_SHORT).show()
                     }
+
                 }
                 is DataState.Error -> {
                     loadingProgressBar.hide()
@@ -67,7 +69,11 @@ class PostDetailFragment : Fragment() {
                     loadingProgressBar.show()
                 }
             }
-        }
+        }}
 
+    override fun onDetailFavoriteClick(post: PostDTO) {
+        viewHolderModel.onFavoritePost(post)
     }
+
+
 }

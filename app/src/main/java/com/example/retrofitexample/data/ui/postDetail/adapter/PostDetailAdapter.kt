@@ -9,10 +9,8 @@ import com.example.retrofitexample.data.model.PostDTO
 import com.example.retrofitexample.data.ui.postDetail.fragment.PostDetailFragment
 import com.example.retrofitexample.databinding.ItemDetailLayoutBinding
 
-class PostDetailAdapter(postDetailFragment: PostDetailFragment) : ListAdapter<PostDTO, PostDetailAdapter.PostDetailViewHolder>(
+class PostDetailAdapter(postDetailFragment: PostDetailFragment,private val listener: OnPostLikeClickListener) : ListAdapter<PostDTO, PostDetailAdapter.PostDetailViewHolder>(
     PostDetailDiffUtil()) {
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostDetailViewHolder {
         return PostDetailViewHolder(
             ItemDetailLayoutBinding.inflate(
@@ -23,13 +21,15 @@ class PostDetailAdapter(postDetailFragment: PostDetailFragment) : ListAdapter<Po
         )
     }
     override fun onBindViewHolder(holder: PostDetailViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position),listener)
     }
 
     class PostDetailViewHolder(private val binding: ItemDetailLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(post: PostDTO) {
+        fun bind(post: PostDTO, listener: OnPostLikeClickListener) {
             binding.dataHolder = post
-
+            binding.ivPostImage.setOnClickListener {
+                listener.onDetailFavoriteClick(post)
+            }
 
             binding.executePendingBindings()
         }
@@ -43,5 +43,7 @@ class PostDetailAdapter(postDetailFragment: PostDetailFragment) : ListAdapter<Po
             return oldItem == newItem
         }
     }
-
+}
+interface OnPostLikeClickListener {
+    fun onDetailFavoriteClick(post: PostDTO)
 }

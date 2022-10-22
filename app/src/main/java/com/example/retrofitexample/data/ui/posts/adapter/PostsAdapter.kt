@@ -1,22 +1,17 @@
-package com.example.retrofitexample.ui.posts.adapter
+package com.example.retrofitexample.data.ui.posts.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.retrofitexample.R
-import com.example.retrofitexample.data.model.Post
 import com.example.retrofitexample.data.model.PostDTO
 import com.example.retrofitexample.databinding.ItemPostLayoutBinding
 
 
-class PostsAdapter(private val listener: OnPostClickListener) : ListAdapter<PostDTO, PostsAdapter.PostViewHolder>(PostsDiffUtil()) {
+class PostsAdapter(private val listener: OnPostClickListener) : ListAdapter<PostDTO, PostsAdapter.PostViewHolder>(
+    PostsDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
        return PostViewHolder(
             ItemPostLayoutBinding.inflate(
